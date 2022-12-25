@@ -168,7 +168,7 @@ def display_cars():
 
 
 def add_cars():
-    with open("DisplayCars_Data.txt", "r+") as text:
+    with open("DisplayCars_Data.txt", "a") as text:
         car_type = input("Type: ")
         brand = input("Brand: ")
         color = input("Color: ")
@@ -330,7 +330,7 @@ def book_cars():
         print("Booking Date: ", booking_date)
 
         # write to file
-        with open("Booking_Data.txt", "r+") as text:
+        with open("Booking_Data.txt", "a") as text:
 
             record_str = username + ":"
             for rec in record:
@@ -360,33 +360,33 @@ def delivery_car():
                 print(str(i + 1) + ". Type: %s Brand: %s Color: %s Year: %s Booking Date: %s" %
                       (record[1], record[2], record[3], record[4], record[7]))
 
-                index = int(
-                    input("Press enter the number of the car you want to deliver: ")) - 1
+        index = int(
+            input("Press enter the number of the car you want to deliver: ")) - 1
 
-                # if index error
-                if index + 1 > len(lines):
-                    print("Please enter a valid number!")
-                    return
+        # if index error
+        if index + 1 > len(lines):
+            print("Please enter a valid number!")
+            return
 
-                record = lines[index].split(':')
+        record = lines[index].split(':')
 
-                date = record[7].replace("\n", "")
-                # convert to date
-                date = datetime.datetime.strptime(date, "%d/%m/%Y").date()
-                # get today's date
-                today = datetime.date.today()
-                # get difference
-                difference = today - date
-                # convert to int
-                difference = int(difference.days)
-                # get price
-                price = int(record[5])
-                # calculate total price
-                total_price = (price * difference) + int(record[6])
-                if difference > 0:
-                    print("Total Price: ", total_price)
-                else:
-                    print("Total Price: ", price)
+        date = record[7].replace("\n", "")
+        # convert to date
+        date = datetime.datetime.strptime(date, "%d/%m/%Y").date()
+        # get today's date
+        today = datetime.date.today()
+        # get difference
+        difference = today - date
+        # convert to int
+        difference = int(difference.days)
+        # get price
+        price = int(record[5])
+        # calculate total price
+        total_price = (price * difference) + int(record[6])
+        if difference > 0:
+            print("Total Price: ", total_price)
+        else:
+            print("Total Price: ", price)
 
     # remove from booking cars
     with open("Booking_Data.txt", "w") as text:
@@ -395,7 +395,7 @@ def delivery_car():
                 text.write(line)
 
     # add to display cars
-    with open("DisplayCars_Data.txt", "r+") as text:
+    with open("DisplayCars_Data.txt", "a") as text:
         for line in lines:
             if line == lines[index]:
                 text.write(line.split(":")[1] + ":" + line.split(":")[2] + ":" +
@@ -419,23 +419,27 @@ def show_personal_history():
 
 def check_files():
     if os.path.isfile("Admin_Data.txt") is False:
-        with open("Admin_Data.txt", "r+") as text:
+        with open("Admin_Data.txt", "a") as text:
             pass
 
             with open("Admin_Data.txt", "r+") as text:
                 if len(text.readlines()) == 0:
                     text.write("admin:admin\n")
     if os.path.isfile("DisplayCars_Data.txt") is False:
-        with open("DisplayCars_Data.txt", "r+") as text:
+        with open("DisplayCars_Data.txt", "a") as text:
             pass
+
+            with open("DisplayCars_Data.txt", "r+") as text:
+                if len(text.readlines()) == 0:
+                    text.write("1:1:1:1:100\n")
     if os.path.isfile("Booking_Data.txt") is False:
-        with open("Booking_Data.txt", "r+") as text:
+        with open("Booking_Data.txt", "a") as text:
             pass
     if os.path.isfile("User_Data.txt") is False:
-        with open("User_Data.txt", "r+") as text:
+        with open("User_Data.txt", "a") as text:
             pass
     if os.path.isfile("User_Data.txt") is False:
-        with open("User_Data.txt", "r+") as text:
+        with open("User_Data.txt", "a") as text:
             pass
 
 
