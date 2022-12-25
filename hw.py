@@ -6,21 +6,10 @@ username = ""
 
 def main():
     global username
-    time = datetime.datetime.now()
 
     check_files()
 
-    print("""
-                   _______
-                  //  ||\ \\
-            _____//___||_\ \___
-            )  _          _    \\
-            |_/ \________/ \___|
-           ___\_/________\_/______
-       """)
-
-    print("\n\tWELCOME TO CAR RENTAL SHOP!\n")
-    print(f"\tCurrent date and time: {time}")
+    print("\n\tWELCOME TO CAR RENTAL SHOP!")
 
     while True:
         print("""
