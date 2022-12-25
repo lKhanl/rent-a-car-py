@@ -54,7 +54,9 @@ def main():
 
 
 def login(user, password, elevated):
-    with open("User_Data.txt" if not elevated else "Admin_Data.txt", "r") as text:
+    if os.path.isfile("User_Data.txt") is False:
+        open("User_Data.txt", "a")
+    with open("User_Data.txt" if not elevated else "Admin_Data.txt", "a") as text:
         print("%s Login ********" %
               ("******** Admin" if elevated else "******** User"))
         for record in text:
@@ -124,6 +126,8 @@ def admin_function():
 
 
 def get_new_users():
+    if os.path.isfile("User_Data.txt") is False:
+        open("User_Data.txt", "a")
     with open("User_Data.txt", "r+") as text:
         while True:
             name = input("Enter name to register: ")
@@ -147,7 +151,9 @@ def existing_users():
 
 
 def display_cars():
-    with open("DisplayCars_Data.txt", "r") as text:
+    if os.path.isfile("DisplayCars_Data.txt") is False:
+        open("DisplayCars_Data.txt", "a")
+    with open("DisplayCars_Data.txt", "a") as text:
         lines = text.readlines()
         index = 1
         if len(lines) == 0:
@@ -166,6 +172,8 @@ def display_cars():
 
 
 def add_cars():
+    if os.path.isfile("DisplayCars_Data.txt") is False:
+        open("DisplayCars_Data.txt", "a")
     with open("DisplayCars_Data.txt", "a") as text:
         car_type = input("Type: ")
         brand = input("Brand: ")
@@ -177,7 +185,7 @@ def add_cars():
 
 def modify_cars():
     display_cars()
-    with open("DisplayCars_Data.txt", "r") as text:
+    with open("DisplayCars_Data.txt", "a") as text:
         index_to_modify = int(input("Select record to modify: "))
         lines = text.readlines()
         if index_to_modify - 1 >= len(lines) or index_to_modify < 0:
@@ -200,8 +208,10 @@ def modify_cars():
 
 
 def display_booking():
+    if os.path.isfile("Booking_Data.txt") is False:
+        open("Booking_Data.txt", "a")
     print("******** Display Booking ********")
-    with open("Booking_Data.txt", "r") as text:
+    with open("Booking_Data.txt", "a") as text:
         lines = text.readlines()
         index = 1
         if len(lines) == 0:
@@ -299,7 +309,7 @@ def book_cars():
 
     display_cars()
 
-    with open("DisplayCars_Data.txt", "r") as text:
+    with open("DisplayCars_Data.txt", "a") as text:
         lines = text.readlines()
 
         index = int(input("Select Car for booking: "))
@@ -329,6 +339,8 @@ def book_cars():
         print("Booking Date: ", booking_date)
 
         # write to file
+        if os.path.isfile("Booking_Data.txt") is False:
+            open("Booking_Data.txt", "a")
         with open("Booking_Data.txt", "a") as text:
 
             record_str = username + ":"
@@ -351,7 +363,9 @@ def book_cars():
 def delivery_car():
     print("******** Car Delivery ********")
 
-    with open("Booking_Data.txt", "r") as text:
+    if os.path.isfile("Booking_Data.txt") is False:
+        open("Booking_Data.txt", "a")
+    with open("Booking_Data.txt", "a") as text:
         lines = text.readlines()
         for i, line in enumerate(lines):
             record = line.rstrip().split(":")
@@ -398,7 +412,9 @@ def delivery_car():
 
 def show_personal_history():
 
-    with open("Booking_Data.txt", "r") as text:
+    if os.path.isfile("Booking_Data.txt") is False:
+        open("Booking_Data.txt", "a")
+    with open("Booking_Data.txt", "a") as text:
         print("\n******** Personal Rental History ********")
         lines = text.readlines()
         if len(lines) == 0:
