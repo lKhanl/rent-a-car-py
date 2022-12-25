@@ -8,7 +8,7 @@ def main():
     global username
     time = datetime.datetime.now()
 
-    check_admin_file()
+    check_files()
 
     print("""
                    _______
@@ -427,7 +427,7 @@ def show_personal_history():
                           (record[1], record[2], record[3], record[4], record[7], record[5]))
 
 
-def check_admin_file():
+def check_files():
     if os.path.isfile("Admin_Data.txt") is False:
         with open("Admin_Data.txt", "a") as text:
             pass
@@ -435,6 +435,18 @@ def check_admin_file():
             with open("Admin_Data.txt", "r+") as text:
                 if len(text.readlines()) == 0:
                     text.write("admin:admin\n")
+    if os.path.isfile("DisplayCars_Data.txt") is False:
+        with open("DisplayCars_Data.txt", "a") as text:
+            pass
+    if os.path.isfile("Booking_Data.txt") is False:
+        with open("Booking_Data.txt", "a") as text:
+            pass
+    if os.path.isfile("User_Data.txt") is False:
+        with open("User_Data.txt", "a") as text:
+            pass
+    if os.path.isfile("User_Data.txt") is False:
+        with open("User_Data.txt", "a") as text:
+            pass
 
 
 if __name__ == "__main__":
