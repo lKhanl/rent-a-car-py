@@ -105,18 +105,6 @@ def admin_function():
             else:
                 display_booking()
 
-        # elif choice == 4:
-        #     option = input("option a or b?")
-        #     if option == 'a':
-        #         # search_car_booking of function goes here
-        #         print("Specific Search of Car Booking")
-        #     else:
-        #         # search_customer_pay function goes here
-        #         print("Specific Search of Customer Payment")
-
-        # elif choice == 5:
-        #     print("return_cars()")
-
         elif choice == 4:
             break
 
@@ -316,6 +304,15 @@ def book_cars():
 
         day = int(input("Enter day(s) for your booking: "))
 
+        if day <= 6:
+            print("No discount")
+        elif day > 6 and day < 11:
+            print("Discount 10%")
+            day = day * 0.9
+        elif day >= 11:
+            print("Discount 20%")
+            day = day * 0.8
+
         total_price = int(record[4]) * day
         print("Total Price: ", total_price)
 
@@ -382,7 +379,7 @@ def delivery_car():
         # get price
         price = int(record[5])
         # calculate total price
-        total_price = (price * difference) + int(record[6])
+        total_price = (price * difference) + float(record[6])
         if difference > 0:
             print("Total Price: ", total_price)
         else:
@@ -431,12 +428,12 @@ def check_files():
 
             with open("DisplayCars_Data.txt", "r+") as text:
                 if len(text.readlines()) == 0:
-                    text.write("sedan:Renault:clio:white:2020:100\n")
-                    text.write("sedan:Honda:Civic:gray:2022:200\n")
-                    text.write("sedan:Mazda:3:white:2018:150\n")
-                    text.write("sedan:Tesla:model3:black:2022:500\n")
-                    text.write("sedan:Toyota:Corolla:gray:2017:100\n")
-                    text.write("sport:Lamborghini:Aventador:white:2022:1000\n")
+                    text.write("sedan:Renault:white:2020:100\n")
+                    text.write("sedan:Honda:gray:2022:200\n")
+                    text.write("sedan:Mazda:white:2018:150\n")
+                    text.write("sedan:Tesla:black:2022:500\n")
+                    text.write("sedan:Toyota:gray:2017:100\n")
+                    text.write("sport:Lamborghini:white:2022:1000\n")
 
     if os.path.isfile("Booking_Data.txt") is False:
         with open("Booking_Data.txt", "a") as text:
